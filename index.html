@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Yunhua Pei, PhD candidate in Computer Science at the University of Bristol. Research on financial market forecasting, graph learning, time-series anomaly detection and LLM agents.">
+<meta name="keywords" content="Yunhua Pei, University of Bristol, AI4CI, quantitative finance, graph learning, LLM agents, anomaly detection">
+<title>Yunhua Pei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single centred academic column in the jemdoc tradition — name block with portrait, then ruled sections. */
+:root {
+  --ground: #e9ecf1;      /* area around the page sheet */
+  --sheet: #ffffff;       /* the page itself */
+  --ink: #1b2330;         /* body text */
+  --muted: #5b6575;       /* venues, dates, secondary text */
+  --rule: #cfd5de;        /* section rules */
+  --accent: #2a5599;      /* headings and links */
+  --accent-soft: #e8eef8; /* venue tag fill */
+  --award: #9a5b00;       /* best-paper mark */
+  --award-soft: #fbf0dc;
+
+  --font-display: "Crimson Pro", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.3rem;
+  --step-2: 2.4rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #10141b; --sheet: #171c25; --ink: #dfe4ec; --muted: #9aa4b4;
+    --rule: #2f3846; --accent: #8db2ee; --accent-soft: #223149;
+    --award: #f0b45a; --award-soft: #3a2c14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #10141b; --sheet: #171c25; --ink: #dfe4ec; --muted: #9aa4b4;
+  --rule: #2f3846; --accent: #8db2ee; --accent-soft: #223149;
+  --award: #f0b45a; --award-soft: #3a2c14; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--ground); }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 28px;
+}
+.sheet {
+  max-width: 900px;
+  margin-inline: auto;
+  background: var(--sheet);
+  padding-inline: clamp(18px, 5vw, 56px);
+  padding-block: 24px 40px;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+nav.sections {
+  display: flex; flex-wrap: wrap; gap: 4px 20px;
+  font-size: var(--step--1);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+nav.sections a { color: var(--muted); }
+nav.sections a:hover { color: var(--accent); }
+
+header.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding-top: 28px;
+}
+header.intro h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.1;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.role { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.affil { margin: 2px 0 0; color: var(--muted); }
+.email { font-family: var(--font-mono); font-size: var(--step--1); margin: 10px 0 0; color: var(--ink); }
+.links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-weight: 600; }
+.portrait {
+  width: 150px; height: 150px; border-radius: 50%;
+  background: var(--accent-soft);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 3rem; color: var(--accent);
+  overflow: hidden;
+}
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+section { scroll-margin-top: 12px; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--accent);
+  margin: 2.2rem 0 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+h2 .aside { font-family: var(--font-body); font-size: var(--step--1); font-weight: 400; color: var(--muted); }
+p { margin: 0 0 0.8rem; max-width: 78ch; }
+
+ul.plain { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.news li { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 12px; }
+.date { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; }
+
+.year { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); letter-spacing: 0.06em; margin: 1.2rem 0 0.5rem; }
+ul.pubs { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.pub-title { font-weight: 600; }
+.authors { color: var(--ink); }
+.authors b { font-weight: 600; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.venue { color: var(--muted); font-style: italic; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; align-items: center; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
+  padding: 1px 8px; border-radius: 3px;
+  background: var(--accent-soft); color: var(--accent);
+}
+.tag.award { background: var(--award-soft); color: var(--award); }
+.tags a { font-size: var(--step--1); }
+
+.entries { display: grid; gap: 14px; }
+.entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; }
+.entry .what { font-weight: 600; }
+.entry .where { grid-column: 1; color: var(--muted); }
+.entry .when { grid-column: 2; grid-row: 1; font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; padding-top: 2px; }
+.entry .note { grid-column: 1 / -1; margin-top: 2px; max-width: 78ch; }
+ul.courses { list-style: disc; padding-left: 1.2rem; margin: 0; display: grid; gap: 2px; }
+
+footer { margin-top: 2.5rem; padding-top: 0.8rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: var(--step--1); }
+
+@media (max-width: 640px) {
+  header.intro { grid-template-columns: 1fr; }
+  .portrait { width: 112px; height: 112px; font-size: 2.3rem; grid-row: 1; }
+  .news li { grid-template-columns: 1fr; gap: 0; }
+  .entry { grid-template-columns: 1fr; }
+  .entry .when { grid-column: 1; grid-row: auto; }
+  h2 .aside { display: block; margin-top: 4px; line-height: 1.4; }
+  ul.news { gap: 12px; }
+}
+@media (max-width: 560px) {
+  body { padding-inline: 0; padding-block: 0; }
+  .sheet { padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<nav class="sections" aria-label="Sections">
+  <a href="#about">About</a>
+  <a href="#news">News</a>
+  <a href="#publications">Publications</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#service">Service &amp; Teaching</a>
+</nav>
+
+<header class="intro" id="top">
+  <div>
+    <h1>Yunhua Pei</h1>
+    <p class="role">PhD Candidate in Computer Science</p>
+    <p class="affil">University of Bristol, UK &middot; Senior Research Associate, <a href="https://ai4ci.ac.uk/" target="_blank" rel="noopener">AI4CI Hub</a></p>
+    <p class="email">ge22472 [at] bristol.ac.uk</p>
+    <div class="links">
+      <a href="https://scholar.google.com/citations?user=YBk7mXQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/yunhua-pei-937737190/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/PEIYUNHUA" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <!-- Replace the initials with <img src="profile.jpg" alt="Yunhua Pei"> once a photo is added. -->
+  <div class="portrait" aria-hidden="true">YP</div>
+</header>
+
+<section id="about">
+  <h2>About</h2>
+  <p>I am a final-year PhD candidate in Computer Science at the University of Bristol, supervised by <b>Prof. John Cartlidge</b> and <b>Dr. Jin Zheng</b>, and a Senior Research Associate at the AI4CI Hub. My thesis, <i>Market, Value, and Momentum</i>, builds a graph-based, multidimensional framework for stock market forecasting.</p>
+  <p>I build and validate forecasting models for noisy, non-stationary market data. Recent work covers stock forecasting with dynamic graph contrastive learning, multi-agent LLM systems for crypto portfolio allocation, unsupervised anomaly detection in multivariate time series, and evaluating LLMs against market participants' revealed positions and trades.</p>
+  <p>Before the PhD, I spent nearly two years as a Senior Quantitative Trading Development Engineer in the Financial Markets Division of China CITIC Bank's head office, forecasting Chinese government bond yields for the bond trading desk. During the PhD I also worked with Stratiphy.AI on multimodal market forecasting through an Innovate UK-funded project.</p>
+  <p><b>Research interests:</b> trading systems, LLM agents, graph learning, time-series anomaly detection.</p>
+</section>
+
+<section id="news">
+  <h2>News</h2>
+  <ul class="plain news">
+    <li><span class="date">2026</span><span>Took over <a href="https://github.com/pixelhero98/AuditOps" target="_blank" rel="noopener">AuditOps</a> at the AI4CI Hub, an LLM-agent system that verifies claims against public company filings.</span></li>
+    <li><span class="date">2026</span><span>Two first-author papers accepted at <b>NeurIPS 2026</b>: StakeBench and Market Regime Council.</span></li>
+    <li><span class="date">2025</span><span>Paper on cross-modal temporal fusion for financial market forecasting published at <b>ECAI 2025</b>.</span></li>
+    <li><span class="date">2025</span><span>Received the <b>Best Paper Award</b> at <b>ICAART 2025</b>.</span></li>
+  </ul>
+</section>
+
+<section id="publications">
+  <h2>Publications <span class="aside"><a href="https://scholar.google.com/citations?user=YBk7mXQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></span></h2>
+
+  <div class="year">2026</div>
+  <ul class="pubs">
+    <li>
+      <div class="pub-title"><a href="https://arxiv.org/pdf/2605.26074" target="_blank" rel="noopener">StakeBench: Evaluating Language Understanding Grounded in Market Commitment</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, Jingyu Hu, Yiwei Shi, Hongnan Ma, Weiru Liu, John Cartlidge</div>
+      <div class="venue">Advances in Neural Information Processing Systems (NeurIPS), 2026</div>
+      <div class="tags"><span class="tag">NeurIPS 2026</span><a href="https://arxiv.org/abs/2605.26074" target="_blank" rel="noopener">[arXiv]</a></div>
+    </li>
+    <li>
+      <div class="pub-title"><a href="https://arxiv.org/pdf/2605.24490" target="_blank" rel="noopener">Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, Zerui Ge, Jin Zheng, John Cartlidge</div>
+      <div class="venue">Advances in Neural Information Processing Systems (NeurIPS), 2026</div>
+      <div class="tags"><span class="tag">NeurIPS 2026</span><a href="https://arxiv.org/abs/2605.24490" target="_blank" rel="noopener">[arXiv]</a></div>
+    </li>
+  </ul>
+
+  <div class="year">2025</div>
+  <ul class="pubs">
+    <li>
+      <div class="pub-title"><a href="https://ebooks.iospress.nl/DOI/10.3233/FAIA251474" target="_blank" rel="noopener">Cross-modal temporal fusion for financial market forecasting</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, John Cartlidge, A. Mandal, D. Gold, E. Marcilio, R. Mazzon</div>
+      <div class="venue">European Conference on Artificial Intelligence (ECAI), 2025</div>
+      <div class="tags"><span class="tag">ECAI 2025</span><a href="https://ebooks.iospress.nl/DOI/10.3233/FAIA251474" target="_blank" rel="noopener">[paper]</a></div>
+    </li>
+    <li>
+      <div class="pub-title"><a href="https://research-information.bris.ac.uk/en/publications/dynamic-graph-representation-with-contrastive-learning-for-financ" target="_blank" rel="noopener">Dynamic Graph Representation with Contrastive Learning for Financial Market Prediction: Integrating Temporal Evolution and Static Relations</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, Jin Zheng, John Cartlidge</div>
+      <div class="venue">International Conference on Agents and Artificial Intelligence (ICAART), 2025</div>
+      <div class="tags"><span class="tag">ICAART 2025</span><span class="tag award">Best Paper Award</span><a href="https://research-information.bris.ac.uk/en/publications/dynamic-graph-representation-with-contrastive-learning-for-financ" target="_blank" rel="noopener">[paper]</a><a href="https://github.com/PEIYUNHUA/DGRCL" target="_blank" rel="noopener">[code]</a></div>
+    </li>
+  </ul>
+
+  <div class="year">EARLIER</div>
+  <ul class="pubs">
+    <li>
+      <div class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-030-63426-1_8" target="_blank" rel="noopener">A Cascaded Approach for Keyframes Extraction from Videos</a></div>
+      <div class="authors"><b>Yunhua Pei</b>, Zhiyi Huang, Wenjie Yu, Meili Wang*, Xuequan Lu</div>
+      <div class="venue">International Conference on Computer Animation and Social Agents (CASA), 2020</div>
+      <div class="tags"><span class="tag">CASA 2020</span><a href="https://link.springer.com/chapter/10.1007/978-3-030-63426-1_8" target="_blank" rel="noopener">[paper]</a></div>
+    </li>
+    <li>
+      <div class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-981-13-9917-6_13" target="_blank" rel="noopener">Sugarcane Node Identification Based on Structured Learning Model</a></div>
+      <div class="authors">Xiao Hu, Shuqin Li*, Meili Wang*, Changyou Shi, Jing Shang, <b>Yunhua Pei</b>, Ganran Deng, Deqiang Zhou</div>
+      <div class="venue">Image and Graphics Technologies and Applications (IGTA), 2019</div>
+      <div class="tags"><span class="tag">IGTA 2019</span><a href="https://link.springer.com/chapter/10.1007/978-981-13-9917-6_13" target="_blank" rel="noopener">[paper]</a></div>
+    </li>
+  </ul>
+
+  <h2>Preprints &amp; Journal Extensions</h2>
+  <ul class="pubs">
+    <li>
+      <div class="pub-title"><a href="https://arxiv.org/pdf/2605.23744" target="_blank" rel="noopener">Contrast to Detect: Dynamic Graph Contrastive Regularization for Unsupervised Anomaly Detection in Multivariate Time Series</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, Zixing Song, Jin Zheng, John Cartlidge</div>
+      <div class="venue">Submitted to WSDM 2027</div>
+      <div class="tags"><a href="https://arxiv.org/abs/2605.23744" target="_blank" rel="noopener">[arXiv]</a></div>
+    </li>
+    <li>
+      <div class="pub-title"><a href="https://research-information.bris.ac.uk/en/publications/dgrcl-a-dynamic-contrastive-graph-learning-framework-for-modeling/" target="_blank" rel="noopener">DGRCL: A Dynamic Contrastive Graph Learning Framework for Modeling Stock Market Evolution</a></div>
+      <div class="authors"><b>Yunhua Pei</b>*, Jin Zheng, John Cartlidge</div>
+      <div class="venue">Extended journal version of the ICAART 2025 paper</div>
+      <div class="tags"><a href="https://research-information.bris.ac.uk/en/publications/dgrcl-a-dynamic-contrastive-graph-learning-framework-for-modeling/" target="_blank" rel="noopener">[paper]</a><a href="https://github.com/PEIYUNHUA/DGRCL" target="_blank" rel="noopener">[code]</a></div>
+    </li>
+  </ul>
+
+  <h2>Patent</h2>
+  <ul class="pubs">
+    <li>
+      <div class="pub-title"><a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo=2018101512" target="_blank" rel="noopener">A comprehensive stock trend predicting method based on neural networks</a></div>
+      <div class="authors">Ruiyun Wang, Xi Peng, <b>Yunhua Pei</b>, Xun Dong, Ye Yuan, Yu Shi</div>
+      <div class="venue">Australian Innovation Patent 2018101512</div>
+    </li>
+  </ul>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="entries">
+    <div class="entry">
+      <span class="what">Senior Research Associate, AI4CI Hub</span>
+      <span class="when">10/2026 – present</span>
+      <span class="where">University of Bristol, UK &middot; Project AuditOps (Innovate UK-funded R&amp;D)</span>
+      <span class="note">Continuing development of AuditOps, an LLM-agent system that verifies claims against SEC and Companies House filings using retrieval, deterministic calculation and citation-checked extraction.</span>
+    </div>
+    <div class="entry">
+      <span class="what">Senior Research Associate (Quantitative Trading)</span>
+      <span class="when">06/2024 – 06/2025</span>
+      <span class="where"><a href="https://www.stratiphy.io/" target="_blank" rel="noopener">Stratiphy.AI</a>, London, UK &middot; seconded via the University of Bristol AI4CI Hub</span>
+      <span class="note">Built CMTF, a transformer model that fuses FTSE 100 prices, macro indices, news sentiment and financial reports for interpretable price-direction forecasting.</span>
+    </div>
+    <div class="entry">
+      <span class="what">Senior Quantitative Trading Development Engineer</span>
+      <span class="when">03/2021 – 11/2022</span>
+      <span class="where">China CITIC Bank (Head Office), Financial Markets Division, Beijing</span>
+      <span class="note">Built and deployed a multi-factor LSTM strategy for China government bond yields with the bond trading desk, and raised long-term forecast precision by 15.3% by combining model output with technical analysis and market views.</span>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="entries">
+    <div class="entry">
+      <span class="what">PhD in Computer Science</span>
+      <span class="when">02/2023 – 02/2027 (expected)</span>
+      <span class="where">University of Bristol, UK</span>
+    </div>
+    <div class="entry">
+      <span class="what">MSc in Data Science</span>
+      <span class="when">09/2019 – 11/2020</span>
+      <span class="where">University of Sheffield, UK</span>
+    </div>
+    <div class="entry">
+      <span class="what">BSc in Information Management and Information Systems</span>
+      <span class="when">08/2015 – 06/2019</span>
+      <span class="where">Northwest A&amp;F University, China</span>
+    </div>
+  </div>
+</section>
+
+<section id="service">
+  <h2>Honors &amp; Awards</h2>
+  <ul class="plain">
+    <li><b>Best Paper Award</b>, ICAART 2025</li>
+  </ul>
+
+  <h2>Professional Activities</h2>
+  <ul class="plain">
+    <li><b>Conference reviewer:</b> NeurIPS, AAAI</li>
+    <li><b>Journal reviewer:</b> ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM)</li>
+  </ul>
+
+  <h2>Teaching</h2>
+  <p>Graduate Teacher, University of Bristol</p>
+  <ul class="courses">
+    <li>Advanced Financial Technology</li>
+    <li>Data Science Mini-Project</li>
+    <li>Large-Scale Data Engineering</li>
+  </ul>
+</section>
+
+<footer>Last updated October 2026</footer>
+
+</div>
+</body>
+</html>
